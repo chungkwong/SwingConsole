@@ -1,0 +1,51 @@
+  Copyright (C) 2015
+  Chan Chung Kwong
+  
+  Copying and distribution of this file, with or without modification,
+  are permitted in any medium without royalty provided the copyright
+  notice and this notice are preserved.
+
+==============================Introduction==============================
+
+This is SwingConsole. It is a free Java library intended to provide a 
+swing component that can be used as a front-end of shell-like application.
+The component combined the most essential command-line editing features and
+some handy GUI style editing features
+
+This is still in pre-alpha stage.
+
+==============================Features==============================
+
+    * Customizable Completers that support multiple choice
+    * History list
+    * Useful keyboard short-cut
+        - Ctrl-C for copy
+        - Ctrl-X for cut
+        - Ctrl-V for paste
+        - Ctrl-Z for undo
+        - Ctrl-Shift-Z for redo
+
+*********************************************************************************
+
+  版权所有 (C) 2015
+  陈颂光
+  
+  在任何媒介复制和散布这个文件，不管有否修改，只要保持这注记，都是被容许的。
+
+==============================特性==============================
+
+这是 SwingConsole ，一个自由的Java库，用于提供可为类shell应用的前端。
+它结合一些方便的命令行和图形界面风格编辑特性。
+
+这是一个准预览阶段的项目。
+
+==============================特性==============================
+
+    * 可定制的多提示
+    * 历史记录
+    * 快捷键
+        - Ctrl-C 复制
+        - Ctrl-X 剪切
+        - Ctrl-V 粘贴
+        - Ctrl-Z for undo
+        - Ctrl-Shift-Z for redo
