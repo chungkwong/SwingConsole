@@ -25,7 +25,7 @@ import javax.swing.text.*;
 /**
  * A swing component that show auto-complete choice
  */
-public final class CompletePrompt extends JPopupMenu implements KeyListener,UndoableEditListener,MouseListener{
+public final class CompletePrompt extends JPopupMenu implements KeyListener,UndoableEditListener,MouseListener,ComponentListener{
 	List<String> options=new ArrayList<String>();
 	DefaultListModel<String> vec=new DefaultListModel<String>();
 	JTextField input=new JTextField();
@@ -51,13 +51,13 @@ public final class CompletePrompt extends JPopupMenu implements KeyListener,Undo
 		input.getDocument().addUndoableEditListener(this);
 		input.addKeyListener(this);
 		loc.addMouseListener(this);
+		this.addComponentListener(this);
 		add(input);
 		add(loc);
 		pack();
 		try{
 			Rectangle rect=area.modelToView(pos);
 			show(area,(int)rect.getX(),(int)rect.getY());
-			input.requestFocus();
 		}catch(Exception ex){
 			ex.printStackTrace();
 		}
@@ -107,6 +107,14 @@ public final class CompletePrompt extends JPopupMenu implements KeyListener,Undo
 	public void mouseExited(MouseEvent e){}
 	public void mousePressed(MouseEvent e){}
 	public void mouseReleased(MouseEvent e){}
+	public void componentHidden(ComponentEvent e){}
+	public void componentMoved(ComponentEvent e){
+		input.requestFocus();
+	}
+	public void componentResized(ComponentEvent e){
+		input.requestFocus();
+	}
+	public void componentShown(ComponentEvent e){}
 	/**
 	 * Make the final choice
 	 * @param choice final choice

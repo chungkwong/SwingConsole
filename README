@@ -22,6 +22,7 @@ This is still in pre-alpha stage.
         - Ctrl-C for copy
         - Ctrl-X for cut
         - Ctrl-V for paste
+        - Ctrl-S for save as file
         - Ctrl-Z for undo
         - Ctrl-Shift-Z for redo
 
@@ -47,5 +48,6 @@ This is still in pre-alpha stage.
         - Ctrl-C 复制
         - Ctrl-X 剪切
         - Ctrl-V 粘贴
-        - Ctrl-Z for undo
-        - Ctrl-Shift-Z for redo
+        - Ctrl-S 保存
+        - Ctrl-Z 撤销
+        - Ctrl-Shift-Z 重做

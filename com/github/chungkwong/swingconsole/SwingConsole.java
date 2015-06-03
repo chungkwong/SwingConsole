@@ -18,6 +18,7 @@
 package com.github.chungkwong.swingconsole;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.*;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.event.*;
@@ -35,6 +36,7 @@ public final class SwingConsole extends JPanel implements CaretListener,KeyListe
 	String PS1="$ ",currentEdit=null;
 	LinkedList<String> history=new LinkedList<String>();
 	ListIterator<String> iter=null;
+	JFileChooser jfc=new JFileChooser();
 	final UndoManager undoManager=new UndoManager();
 	/**
 	 * Construct a SwingConsole
@@ -102,8 +104,23 @@ public final class SwingConsole extends JPanel implements CaretListener,KeyListe
 		});
 		InputMap im=area.getInputMap();
 		ActionMap am=area.getActionMap();
+		im.put(KeyStroke.getKeyStroke(KeyEvent.VK_S,InputEvent.CTRL_DOWN_MASK),"Save");
 		im.put(KeyStroke.getKeyStroke(KeyEvent.VK_Z,InputEvent.CTRL_DOWN_MASK),"Undo");
 		im.put(KeyStroke.getKeyStroke(KeyEvent.VK_Z,InputEvent.CTRL_DOWN_MASK|InputEvent.SHIFT_DOWN_MASK),"Redo");
+		am.put("Save",new AbstractAction(){
+			public void actionPerformed(ActionEvent e){
+				try{
+					if(jfc.showSaveDialog(null)==JFileChooser.APPROVE_OPTION){
+						File file=jfc.getSelectedFile();
+						Writer out=new OutputStreamWriter(new FileOutputStream(file),"UTF-8");
+						out.write(area.getText());
+						out.close();
+					}
+				}catch(Exception ex){
+					ex.printStackTrace();
+				}
+			}
+		});
 		am.put("Undo",new AbstractAction(){
 			public void actionPerformed(ActionEvent e){
 				try{
@@ -125,7 +142,7 @@ public final class SwingConsole extends JPanel implements CaretListener,KeyListe
 			}
 		});
 		setLayout(new BorderLayout());
-		add(new JScrollPane(area));
+		add(new JScrollPane(area),BorderLayout.CENTER);
 		area.append(initPrompt);
 		start=initPrompt.length();
 		area.setCaretPosition(PS1.length());
@@ -288,5 +305,19 @@ public final class SwingConsole extends JPanel implements CaretListener,KeyListe
 			iter=null;
 			return currentEdit;
 		}
+	}
+	/**
+	 * Get the font currently used
+	 * @return the font
+	 */
+	public Font getTextFont(){
+		return area.getFont();
+	}
+	/**
+	 * Set the font to be used
+	 * @param font the font
+	 */
+	public void setTextFont(Font font){
+		area.setFont(font);
 	}
 }
